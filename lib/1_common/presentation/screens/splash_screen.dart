@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3));
-    
+
     if (mounted) {
       Navigator.pushReplacementNamed(context, RoutePath.login);
     }
@@ -26,20 +26,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
+      // backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
               'osclink-logo.png',
-              height: 120,
-              width: 120,
+              height: 220,
+              width: 220,
               fit: BoxFit.contain,
             ),
             SizedBox(height: 20),
             CircularProgressIndicator(
-              color: Colors.white,
+              color: Colors.green,
             ),
           ],
         ),

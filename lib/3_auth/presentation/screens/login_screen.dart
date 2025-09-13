@@ -62,19 +62,13 @@ class _LoginViewState extends State<LoginView> {
                 children: [
                   const SizedBox(height: 60),
                   // Logo
-                  const Icon(
-                    Icons.link,
-                    size: 80,
-                    color: Colors.blue,
+                  Image.asset(
+                    'osclink-logo.png',
+                    height: 56,
+                    width: 56,
+                    fit: BoxFit.contain,
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'OSC Link',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
+                  SizedBox(height: 20),
                   const SizedBox(height: 8),
                   const Text(
                     'Connect with the open source community',
@@ -82,7 +76,7 @@ class _LoginViewState extends State<LoginView> {
                     style: TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(height: 48),
-                  
+
                   // Email field
                   TextFormField(
                     controller: _emailController,
@@ -103,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Password field
                   TextFormField(
                     controller: _passwordController,
@@ -113,7 +107,9 @@ class _LoginViewState extends State<LoginView> {
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                          _obscurePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
                         ),
                         onPressed: () {
                           setState(() {
@@ -134,7 +130,7 @@ class _LoginViewState extends State<LoginView> {
                     },
                   ),
                   const SizedBox(height: 24),
-                  
+
                   // Login button
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
@@ -149,9 +145,9 @@ class _LoginViewState extends State<LoginView> {
                       );
                     },
                   ),
-                  
+
                   const SizedBox(height: 16),
-                  
+
                   // Forgot password
                   TextButton(
                     onPressed: () {
@@ -159,9 +155,9 @@ class _LoginViewState extends State<LoginView> {
                     },
                     child: const Text('Forgot Password?'),
                   ),
-                  
+
                   const SizedBox(height: 24),
-                  
+
                   // Sign up link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
