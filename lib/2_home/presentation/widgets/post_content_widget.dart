@@ -23,7 +23,6 @@ class PostContentWidget extends StatelessWidget {
           Text(
             content,
             style: const TextStyle(
-              fontFamily: 'SF Pro Text',
               fontSize: 16,
               height: 1.25,
               color: Color(0xFF141619),

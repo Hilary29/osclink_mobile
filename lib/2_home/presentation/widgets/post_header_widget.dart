@@ -28,7 +28,6 @@ class PostHeaderWidget extends StatelessWidget {
                 child: Text(
                   author.name,
                   style: const TextStyle(
-                    fontFamily: 'SF Pro Text',
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF141619),
@@ -59,7 +58,6 @@ class PostHeaderWidget extends StatelessWidget {
                 child: Text(
                   '${author.username} · $timeAgo',
                   style: const TextStyle(
-                    fontFamily: 'SF Pro Text',
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF687684),

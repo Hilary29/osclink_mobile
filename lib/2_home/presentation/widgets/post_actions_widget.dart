@@ -22,7 +22,6 @@ class PostActionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     const iconColor = Color(0xFF687684);
     const textStyle = TextStyle(
-      fontFamily: 'SF Pro Text',
       fontSize: 12,
       color: Color(0xFF687684),
       letterSpacing: -0.3,
