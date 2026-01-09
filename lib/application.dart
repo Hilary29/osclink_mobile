@@ -8,7 +8,6 @@ import '1_common/business_logic/common_bloc.dart';
 import '2_home/business_logic/home_bloc.dart';
 import '3_auth/business_logic/auth_bloc.dart';
 import '4_profile/business_logic/profile_bloc.dart';
-import '5_feed/business_logic/feed_bloc.dart';
 import '7_chat/business_logic/chat_bloc.dart';
 import '9_resources/business_logic/resources_bloc.dart';
 
@@ -30,9 +29,6 @@ class OSCLinkApp extends StatelessWidget {
         ),
         BlocProvider<ProfileBloc>(
           create: (context) => ProfileBloc(),
-        ),
-        BlocProvider<FeedBloc>(
-          create: (context) => FeedBloc(),
         ),
         BlocProvider<ChatBloc>(
           create: (context) => ChatBloc(),

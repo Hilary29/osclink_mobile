@@ -27,17 +27,14 @@ class AppRouter {
       case RoutePath.home:
         return _buildRoute(const BottomNavigationWrapper(initialIndex: 0), settings);
         
-      case RoutePath.feed:
+      case RoutePath.chat:
         return _buildRoute(const BottomNavigationWrapper(initialIndex: 1), settings);
         
-      case RoutePath.chat:
+      case RoutePath.map:
         return _buildRoute(const BottomNavigationWrapper(initialIndex: 2), settings);
         
-      case RoutePath.map:
-        return _buildRoute(const BottomNavigationWrapper(initialIndex: 3), settings);
-        
       case RoutePath.profile:
-        return _buildRoute(const BottomNavigationWrapper(initialIndex: 4), settings);
+        return _buildRoute(const BottomNavigationWrapper(initialIndex: 3), settings);
         
       case RoutePath.projects:
         return _buildRoute(const ProjectsScreen(), settings);

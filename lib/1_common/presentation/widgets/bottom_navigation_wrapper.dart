@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osclink_mobile/2_home/presentation/screens/home_screen.dart';
 import 'package:osclink_mobile/4_profile/presentation/screens/profile_screen.dart';
-import 'package:osclink_mobile/5_feed/presentation/screens/feed_screen.dart';
 import 'package:osclink_mobile/6_map/presentation/screens/map_screen.dart';
 import 'package:osclink_mobile/7_chat/presentation/screens/chat_screen.dart';
 import 'bottom_navigation_bar.dart';
@@ -24,7 +23,6 @@ class _BottomNavigationWrapperState extends State<BottomNavigationWrapper> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    FeedScreen(),
     ChatScreen(),
     MapScreen(),
     ProfileScreen(),

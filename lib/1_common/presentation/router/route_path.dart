@@ -9,7 +9,6 @@ class RoutePath {
   
   // Main app routes
   static const String home = '/home';
-  static const String feed = '/feed';
   static const String chat = '/chat';
   static const String map = '/map';
   static const String profile = '/profile';

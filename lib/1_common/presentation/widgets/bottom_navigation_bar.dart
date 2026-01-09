@@ -38,11 +38,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.feed_outlined),
-            activeIcon: Icon(Icons.feed),
-            label: 'Feed',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
             activeIcon: Icon(Icons.chat_bubble),
             label: 'Chat',
@@ -115,11 +110,6 @@ class CurvedBottomNavigationBar extends StatelessWidget {
               icon: Icon(Icons.home_outlined),
               activeIcon: Icon(Icons.home),
               label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.feed_outlined),
-              activeIcon: Icon(Icons.feed),
-              label: 'Feed',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.chat_bubble_outline),
