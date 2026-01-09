@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:osclink_mobile/1_common/presentation/themes/app_colors.dart';
+import 'package:osclink_mobile/2_home/business_logic/post_list/post_list_bloc.dart';
 import '1_common/presentation/router/router.dart';
 import '1_common/presentation/router/route_path.dart';
 import '1_common/presentation/router/route_logger_observer.dart';
 import '1_common/business_logic/common_bloc.dart';
-import '2_home/business_logic/home_bloc.dart';
 import '3_auth/business_logic/auth_bloc.dart';
 import '4_profile/business_logic/profile_bloc.dart';
 import '7_chat/business_logic/chat_bloc.dart';
@@ -24,8 +24,8 @@ class OSCLinkApp extends StatelessWidget {
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(),
         ),
-        BlocProvider<HomeBloc>(
-          create: (context) => HomeBloc(),
+        BlocProvider<PostListBloc>(
+          create: (context) => PostListBloc(),
         ),
         BlocProvider<ProfileBloc>(
           create: (context) => ProfileBloc(),

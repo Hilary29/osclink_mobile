@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osclink_mobile/2_home/data/models/post_model.dart';
 import '../../data/repositories/post_repository.dart';
-import 'post_list_event.dart';
-import 'post_list_state.dart';
 
+part 'post_list_event.dart';
+part 'post_list_state.dart';
 class PostListBloc extends Bloc<PostListEvent, PostListState> {
   final PostRepository _repository;
 

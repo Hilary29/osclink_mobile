@@ -1,4 +1,4 @@
-import '../../data/models/post_model.dart';
+part of 'post_list_bloc.dart';
 
 abstract class PostListState {}
 
