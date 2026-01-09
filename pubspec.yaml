@@ -36,7 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   bloc: ^9.0.0
   flutter_bloc: ^9.0.0
-  go_router: ^14.7.1
+  flutter_map: ^6.0.0
+  latlong2: ^0.9.0 # For latitude and longitude utilities
 
 dev_dependencies:
   flutter_test:

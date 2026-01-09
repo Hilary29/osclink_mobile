@@ -3,9 +3,9 @@ class RoutePath {
   static const String onboarding = '/onboarding';
   
   // Auth routes
-  static const String login = '/auth/login';
-  static const String signup = '/auth/signup';
-  static const String forgotPassword = '/auth/forgot-password';
+  static const String login = '/login';
+  static const String signup = '/signup';
+  static const String forgotPassword = '/forgot-password';
   
   // Main app routes
   static const String home = '/home';

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class MapScreen extends StatelessWidget {
   const MapScreen({super.key});
@@ -6,12 +8,20 @@ class MapScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Map'),
-        automaticallyImplyLeading: false,
-      ),
-      body: const Center(
-        child: Text('Map Screen'),
+      body: FlutterMap(
+        options: const MapOptions(
+          initialCenter: LatLng(51.509865, -0.118092), // initial point
+          initialZoom: 10.0,
+        ),
+        children: [
+          TileLayer(
+            //standard OpenStreetMap tile server URL
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName:
+                'com.your_app_name.app', // A unique package name is required by OSM
+          ),
+          //TODO other layers here
+        ],
       ),
     );
   }

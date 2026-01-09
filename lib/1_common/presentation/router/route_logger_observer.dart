@@ -30,8 +30,7 @@ class RouteLoggerObserver extends RouteObserver<ModalRoute<dynamic>> {
     final previousRouteName = previousRoute?.settings.name ?? 'None';
     final arguments = route?.settings.arguments;
     
-    debugPrint('🚀 NAVIGATION $action: $routeName');
-    debugPrint('   Previous: $previousRouteName');
+    debugPrint(' NAVIGATION $action: $routeName');
     if (arguments != null) {
       debugPrint('   Arguments: $arguments');
     }
