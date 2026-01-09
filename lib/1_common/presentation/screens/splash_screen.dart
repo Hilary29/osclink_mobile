@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osclink_mobile/1_common/presentation/themes/app_colors.dart';
 import '../router/route_path.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             SizedBox(height: 20),
             CircularProgressIndicator(
-              color: Colors.green,
+              color: AppColors.primary,
             ),
           ],
         ),

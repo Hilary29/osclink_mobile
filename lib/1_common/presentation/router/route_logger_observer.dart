@@ -25,11 +25,11 @@ class RouteLoggerObserver extends RouteObserver<ModalRoute<dynamic>> {
     _logNavigation('REMOVE', route, previousRoute);
   }
 
-  void _logNavigation(String action, Route<dynamic>? route, Route<dynamic>? previousRoute) {
+  void _logNavigation(
+      String action, Route<dynamic>? route, Route<dynamic>? previousRoute) {
     final routeName = route?.settings.name ?? 'Unknown';
-    final previousRouteName = previousRoute?.settings.name ?? 'None';
     final arguments = route?.settings.arguments;
-    
+
     debugPrint(' NAVIGATION $action: $routeName');
     if (arguments != null) {
       debugPrint('   Arguments: $arguments');

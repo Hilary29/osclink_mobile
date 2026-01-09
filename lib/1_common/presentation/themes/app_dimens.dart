@@ -1,0 +1,1 @@
+//définit les dimensions et les espacements standards

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osclink_mobile/1_common/presentation/themes/app_colors.dart';
 import '1_common/presentation/router/router.dart';
 import '1_common/presentation/router/route_path.dart';
 import '1_common/presentation/router/route_logger_observer.dart';
@@ -57,7 +58,7 @@ class OSCLinkApp extends StatelessWidget {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: Colors.blue,
+        seedColor: AppColors.primary,
         brightness: Brightness.light,
       ),
       appBarTheme: const AppBarTheme(

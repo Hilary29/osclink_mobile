@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:osclink_mobile/1_common/presentation/themes/app_colors.dart';
 import '../../business_logic/auth_bloc.dart';
 import '../../business_logic/auth_state.dart';
 
@@ -69,9 +70,17 @@ class _LoginViewState extends State<LoginView> {
                     fit: BoxFit.contain,
                   ),
                   SizedBox(height: 20),
+                  const Text(
+                    'Log in to your account',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const SizedBox(height: 8),
                   const Text(
-                    'Connect with the open source community',
+                    'The Civil Society Organisation Network',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey),
                   ),
@@ -137,10 +146,19 @@ class _LoginViewState extends State<LoginView> {
                       return ElevatedButton(
                         onPressed: state is AuthLoading ? null : _handleLogin,
                         style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                         child: state is AuthLoading
-                            ? const CircularProgressIndicator()
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              )
                             : const Text('Login'),
                       );
                     },
@@ -151,7 +169,7 @@ class _LoginViewState extends State<LoginView> {
                   // Forgot password
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/auth/forgot-password');
+                      Navigator.pushNamed(context, '/forgot-password');
                     },
                     child: const Text('Forgot Password?'),
                   ),
@@ -165,7 +183,7 @@ class _LoginViewState extends State<LoginView> {
                       const Text("Don't have an account? "),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/auth/signup');
+                          Navigator.pushNamed(context, '/signup');
                         },
                         child: const Text('Sign Up'),
                       ),
@@ -183,12 +201,6 @@ class _LoginViewState extends State<LoginView> {
   void _handleLogin() {
     if (_formKey.currentState!.validate()) {
       // TODO: Implement login logic
-      // context.read<AuthBloc>().add(
-      //       LoginRequested(
-      //         email: _emailController.text,
-      //         password: _passwordController.text,
-      //       ),
-      //     );
       Navigator.pushReplacementNamed(context, '/home');
     }
   }
