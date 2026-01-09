@@ -12,6 +12,10 @@ class PostContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final imageWidth = screenWidth - 40 - 55 - 8;
+    final imageHeight = imageWidth * 0.73;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,13 +36,13 @@ class PostContentWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
               mediaUrl!,
-              width: 232,
-              height: 169,
+              width: imageWidth,
+              height: imageHeight,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  width: 232,
-                  height: 169,
+                  width: imageWidth,
+                  height: imageHeight,
                   color: const Color(0xFFCED5DC),
                   child: const Icon(Icons.image, size: 50, color: Colors.grey),
                 );

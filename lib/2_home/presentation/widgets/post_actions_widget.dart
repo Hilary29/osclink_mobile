@@ -29,31 +29,38 @@ class PostActionsWidget extends StatelessWidget {
     );
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _ActionButton(
-          icon: Icons.chat_bubble_outline,
-          count: commentsCount,
-          iconColor: iconColor,
-          textStyle: textStyle,
+        Expanded(
+          child: _ActionButton(
+            icon: Icons.chat_bubble_outline,
+            count: commentsCount,
+            iconColor: iconColor,
+            textStyle: textStyle,
+          ),
         ),
-        _ActionButton(
-          icon: Icons.repeat,
-          count: retweetsCount,
-          iconColor: isRetweeted ? Colors.green : iconColor,
-          textStyle: textStyle,
+        Expanded(
+          child: _ActionButton(
+            icon: Icons.repeat,
+            count: retweetsCount,
+            iconColor: isRetweeted ? Colors.green : iconColor,
+            textStyle: textStyle,
+          ),
         ),
-        _ActionButton(
-          icon: isLiked ? Icons.favorite : Icons.favorite_border,
-          count: likesCount,
-          iconColor: isLiked ? Colors.red : iconColor,
-          textStyle: textStyle,
+        Expanded(
+          child: _ActionButton(
+            icon: isLiked ? Icons.favorite : Icons.favorite_border,
+            count: likesCount,
+            iconColor: isLiked ? Colors.red : iconColor,
+            textStyle: textStyle,
+          ),
         ),
-        _ActionButton(
-          icon: Icons.share_outlined,
-          count: sharesCount,
-          iconColor: iconColor,
-          textStyle: textStyle,
+        Expanded(
+          child: _ActionButton(
+            icon: Icons.share_outlined,
+            count: sharesCount,
+            iconColor: iconColor,
+            textStyle: textStyle,
+          ),
         ),
       ],
     );
@@ -76,10 +83,17 @@ class _ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, size: 15, color: iconColor),
         const SizedBox(width: 4),
-        Text(count, style: textStyle),
+        Flexible(
+          child: Text(
+            count,
+            style: textStyle,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }

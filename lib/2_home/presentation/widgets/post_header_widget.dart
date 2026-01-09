@@ -24,14 +24,18 @@ class PostHeaderWidget extends StatelessWidget {
         Expanded(
           child: Row(
             children: [
-              Text(
-                author.name,
-                style: const TextStyle(
-                  fontFamily: 'SF Pro Text',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF141619),
-                  letterSpacing: -0.3,
+              Flexible(
+                child: Text(
+                  author.name,
+                  style: const TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF141619),
+                    letterSpacing: -0.3,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               if (author.isVerified) ...[
@@ -51,14 +55,18 @@ class PostHeaderWidget extends StatelessWidget {
                 ),
               ],
               const SizedBox(width: 4),
-              Text(
-                '${author.username} · $timeAgo',
-                style: const TextStyle(
-                  fontFamily: 'SF Pro Text',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFF687684),
-                  letterSpacing: -0.3,
+              Flexible(
+                child: Text(
+                  '${author.username} · $timeAgo',
+                  style: const TextStyle(
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF687684),
+                    letterSpacing: -0.3,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],
