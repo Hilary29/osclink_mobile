@@ -12,10 +12,6 @@ class PostContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final imageWidth = screenWidth - 40 - 55 - 8;
-    final imageHeight = imageWidth * 0.73;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,20 +28,18 @@ class PostContentWidget extends StatelessWidget {
         if (mediaUrl != null) ...[
           const SizedBox(height: 12),
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              mediaUrl!,
-              width: imageWidth,
-              height: imageHeight,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  width: imageWidth,
-                  height: imageHeight,
+            borderRadius: BorderRadius.circular(12),
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Image.network(
+                mediaUrl!,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => Container(
                   color: const Color(0xFFCED5DC),
-                  child: const Icon(Icons.image, size: 50, color: Colors.grey),
-                );
-              },
+                  child: const Icon(Icons.image_outlined,
+                      size: 48, color: Colors.grey),
+                ),
+              ),
             ),
           ),
         ],

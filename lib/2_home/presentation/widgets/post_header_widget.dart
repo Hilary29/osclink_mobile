@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osclink_mobile/1_common/presentation/themes/app_dimens.dart';
 import '../../data/models/user_model.dart';
 
 class PostHeaderWidget extends StatelessWidget {
@@ -13,10 +14,12 @@ class PostHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final avatarRadius = AppDimens.avatarRadius(context);
+
     return Row(
       children: [
         CircleAvatar(
-          radius: 27.5,
+          radius: avatarRadius,
           backgroundImage: NetworkImage(author.avatarUrl),
           backgroundColor: const Color(0xFFCED5DC),
         ),
@@ -46,11 +49,7 @@ class PostHeaderWidget extends StatelessWidget {
                     color: Color(0xFF4C9EEB),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.check,
-                    size: 10,
-                    color: Colors.white,
-                  ),
+                  child: const Icon(Icons.check, size: 10, color: Colors.white),
                 ),
               ],
               const SizedBox(width: 4),
@@ -58,7 +57,7 @@ class PostHeaderWidget extends StatelessWidget {
                 child: Text(
                   '${author.username} · $timeAgo',
                   style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF687684),
                     letterSpacing: -0.3,
@@ -70,10 +69,10 @@ class PostHeaderWidget extends StatelessWidget {
             ],
           ),
         ),
-        Icon(
+        const Icon(
           Icons.keyboard_arrow_down,
           size: 18,
-          color: const Color(0xFFBDC5CD),
+          color: Color(0xFFBDC5CD),
         ),
       ],
     );

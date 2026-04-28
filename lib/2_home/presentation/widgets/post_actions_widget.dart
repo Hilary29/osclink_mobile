@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PostActionsWidget extends StatelessWidget {
+class PostActionsWidget extends StatefulWidget {
   final String commentsCount;
   final String retweetsCount;
   final String likesCount;
@@ -19,64 +19,92 @@ class PostActionsWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    const iconColor = Color(0xFF687684);
-    const textStyle = TextStyle(
-      fontSize: 12,
-      color: Color(0xFF687684),
-      letterSpacing: -0.3,
-    );
+  State<PostActionsWidget> createState() => _PostActionsWidgetState();
+}
 
+class _PostActionsWidgetState extends State<PostActionsWidget> {
+  late bool _isLiked;
+  late bool _isRetweeted;
+  late int _likesCount;
+  late int _retweetsCount;
+
+  @override
+  void initState() {
+    super.initState();
+    _isLiked = widget.isLiked;
+    _isRetweeted = widget.isRetweeted;
+    _likesCount = int.tryParse(widget.likesCount) ?? 0;
+    _retweetsCount = int.tryParse(widget.retweetsCount) ?? 0;
+  }
+
+  void _toggleLike() =>
+      setState(() {
+        _isLiked = !_isLiked;
+        _likesCount += _isLiked ? 1 : -1;
+      });
+
+  void _toggleRetweet() =>
+      setState(() {
+        _isRetweeted = !_isRetweeted;
+        _retweetsCount += _isRetweeted ? 1 : -1;
+      });
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
           child: _ActionButton(
             icon: Icons.chat_bubble_outline,
-            count: commentsCount,
-            iconColor: iconColor,
-            textStyle: textStyle,
+            count: widget.commentsCount,
+            color: const Color(0xFF687684),
           ),
         ),
         Expanded(
-          child: _ActionButton(
-            icon: Icons.repeat,
-            count: retweetsCount,
-            iconColor: isRetweeted ? Colors.green : iconColor,
-            textStyle: textStyle,
+          child: GestureDetector(
+            onTap: _toggleRetweet,
+            behavior: HitTestBehavior.opaque,
+            child: _ActionButton(
+              icon: Icons.repeat,
+              count: _format(_retweetsCount),
+              color: _isRetweeted ? Colors.green : const Color(0xFF687684),
+            ),
           ),
         ),
         Expanded(
-          child: _ActionButton(
-            icon: isLiked ? Icons.favorite : Icons.favorite_border,
-            count: likesCount,
-            iconColor: isLiked ? Colors.red : iconColor,
-            textStyle: textStyle,
+          child: GestureDetector(
+            onTap: _toggleLike,
+            behavior: HitTestBehavior.opaque,
+            child: _ActionButton(
+              icon: _isLiked ? Icons.favorite : Icons.favorite_border,
+              count: _format(_likesCount),
+              color: _isLiked ? Colors.red : const Color(0xFF687684),
+            ),
           ),
         ),
         Expanded(
           child: _ActionButton(
             icon: Icons.share_outlined,
-            count: sharesCount,
-            iconColor: iconColor,
-            textStyle: textStyle,
+            count: widget.sharesCount,
+            color: const Color(0xFF687684),
           ),
         ),
       ],
     );
   }
+
+  String _format(int n) => n >= 1000 ? '${(n / 1000).toStringAsFixed(1)}k' : '$n';
 }
 
 class _ActionButton extends StatelessWidget {
   final IconData icon;
   final String count;
-  final Color iconColor;
-  final TextStyle textStyle;
+  final Color color;
 
   const _ActionButton({
     required this.icon,
     required this.count,
-    required this.iconColor,
-    required this.textStyle,
+    required this.color,
   });
 
   @override
@@ -84,12 +112,19 @@ class _ActionButton extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 15, color: iconColor),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 150),
+          child: Icon(icon, key: ValueKey(icon), size: 15, color: color),
+        ),
         const SizedBox(width: 4),
         Flexible(
           child: Text(
             count,
-            style: textStyle,
+            style: TextStyle(
+              fontSize: 12,
+              color: color,
+              letterSpacing: -0.3,
+            ),
             overflow: TextOverflow.ellipsis,
           ),
         ),

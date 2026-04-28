@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osclink_mobile/1_common/presentation/themes/app_dimens.dart';
 import '../../data/models/post_model.dart';
 import 'post_header_widget.dart';
 import 'post_content_widget.dart';
@@ -19,13 +20,13 @@ class PostCardWidget extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
-          bottom: BorderSide(
-            color: Color(0xFFCED5DC),
-            width: 0.33,
-          ),
+          bottom: BorderSide(color: Color(0xFFCED5DC), width: 0.33),
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppDimens.horizontalPadding(context),
+        vertical: 16,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

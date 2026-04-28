@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:osclink_mobile/3_auth/presentation/screens/login_screen.dart';
 import 'package:osclink_mobile/3_auth/presentation/screens/signup_screen.dart';
+import 'package:osclink_mobile/4_profile/data/models/profile_model.dart';
 import 'package:osclink_mobile/4_profile/presentation/screens/profile_screen.dart';
 import 'package:osclink_mobile/7_chat/presentation/screens/chat_screen.dart';
 import 'package:osclink_mobile/8_projects/presentation/screens/projects_screen.dart';
@@ -44,7 +45,7 @@ class AppRouter {
         
       case RoutePath.chatDetail:
         if (args is Map<String, dynamic>) {
-          return _buildRoute(ChatDetailScreen(chatId: args['chatId']), settings);
+          return _buildRoute(ChatDetailScreen(conversationId: args['chatId'] as String), settings);
         }
         return _buildRoute(const NotFoundScreen(), settings);
         
@@ -55,7 +56,10 @@ class AppRouter {
         return _buildRoute(const NotFoundScreen(), settings);
         
       case RoutePath.profileEdit:
-        return _buildRoute(const ProfileEditScreen(), settings);
+        if (args is UserProfile) {
+          return _buildRoute(ProfileEditScreen(profile: args), settings);
+        }
+        return _buildRoute(const NotFoundScreen(), settings);
         
       case RoutePath.profileSettings:
         return _buildRoute(const ProfileSettingsScreen(), settings);
