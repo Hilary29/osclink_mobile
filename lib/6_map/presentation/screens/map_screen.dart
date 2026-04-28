@@ -17,8 +17,7 @@ class MapScreen extends StatelessWidget {
           TileLayer(
             //standard OpenStreetMap tile server URL
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName:
-                'com.your_app_name.app', // A unique package name is required by OSM
+            userAgentPackageName: 'com.example.osclink_mobile',
           ),
           //TODO other layers here
         ],
