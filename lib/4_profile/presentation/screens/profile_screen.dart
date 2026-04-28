@@ -125,7 +125,7 @@ class _CoverSliverAppBar extends StatelessWidget {
   static const double _coverHeight = 160;
   static const double _avatarRadius = 44;
   // expandedHeight = cover + avatar bottom half + breathing room
-  static const double _expandedHeight = _coverHeight + _avatarRadius + 16;
+  static const double _expandedHeight = _coverHeight  + 18;
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +171,7 @@ class _CoverSliverAppBar extends StatelessWidget {
                   ),
                   // Bouton Edit en bas à droite de la cover
                   Positioned(
-                    bottom: 10,
+                    bottom: 0,
                     right: 16,
                     child: IconButton(
                       onPressed: () => Navigator.push(
@@ -187,13 +187,12 @@ class _CoverSliverAppBar extends StatelessWidget {
                       style: IconButton.styleFrom(
                         backgroundColor: Colors.white,
                         side: const BorderSide(color: Colors.white70),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 14, vertical: 8),
+                        
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
-                      ), icon: Icon(Icons.edit,
-                          color: Colors.black, size: 18),
+                      ), icon: Icon(Icons.edit_square,
+                          color: AppColors.primary, size: 22),
                     ),
                   ),
                 ],
