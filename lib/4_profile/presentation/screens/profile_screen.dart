@@ -275,9 +275,7 @@ class _ProfileInfoSection extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           _MetaRow(profile: profile),
-          const SizedBox(height: 14),
-          const Divider(color: Color(0xFFCED5DC), height: 1),
-          const SizedBox(height: 14),
+          const SizedBox(height: 16),
           ProfileStatsRow(
             postsCount: profile.postsCount,
             followersCount: profile.followersCount,
