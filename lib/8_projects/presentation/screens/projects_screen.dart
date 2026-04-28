@@ -7,10 +7,10 @@ class ProjectsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Projects'),
+        title: const Text('Projets'),
       ),
       body: const Center(
-        child: Text('Projects Screen'),
+        child: Text('Écran Projets'),
       ),
     );
   }
@@ -28,10 +28,10 @@ class ProjectDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Project $projectId'),
+        title: Text('Projet $projectId'),
       ),
       body: Center(
-        child: Text('Project Detail Screen for ID: $projectId'),
+        child: Text('Détail du projet : $projectId'),
       ),
     );
   }

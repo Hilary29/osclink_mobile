@@ -42,16 +42,6 @@ class _LoginViewState extends State<LoginView> {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           // TODO: Handle auth state changes
-          // if (state is AuthSuccess) {
-          //   Navigator.pushReplacementNamed(context, '/home');
-          // } else if (state is AuthError) {
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //     SnackBar(
-          //       content: Text(state.message),
-          //       backgroundColor: Colors.red,
-          //     ),
-          //   );
-          // }
         },
         child: SafeArea(
           child: SingleChildScrollView(
@@ -62,16 +52,15 @@ class _LoginViewState extends State<LoginView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 60),
-                  // Logo
                   Image.asset(
                     'osclink-logo.png',
                     height: 56,
                     width: 56,
                     fit: BoxFit.contain,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   const Text(
-                    'Log in to your account',
+                    'Connectez-vous à votre compte',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
@@ -80,39 +69,37 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'The Civil Society Organisation Network',
+                    'Le Réseau des Organisations de la Société Civile',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(height: 48),
 
-                  // Email field
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
-                      labelText: 'Email',
+                      labelText: 'Adresse e-mail',
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
+                        return 'Veuillez saisir votre adresse e-mail';
                       }
                       if (!value.contains('@')) {
-                        return 'Please enter a valid email';
+                        return 'Veuillez saisir une adresse e-mail valide';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 16),
 
-                  // Password field
                   TextFormField(
                     controller: _passwordController,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
-                      labelText: 'Password',
+                      labelText: 'Mot de passe',
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -130,17 +117,16 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
+                        return 'Veuillez saisir votre mot de passe';
                       }
                       if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
+                        return 'Le mot de passe doit contenir au moins 6 caractères';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 24),
 
-                  // Login button
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       return ElevatedButton(
@@ -159,33 +145,31 @@ class _LoginViewState extends State<LoginView> {
                                   color: Colors.white,
                                 ),
                               )
-                            : const Text('Login'),
+                            : const Text('Se connecter'),
                       );
                     },
                   ),
 
                   const SizedBox(height: 16),
 
-                  // Forgot password
                   TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, '/forgot-password');
                     },
-                    child: const Text('Forgot Password?'),
+                    child: const Text('Mot de passe oublié ?'),
                   ),
 
                   const SizedBox(height: 24),
 
-                  // Sign up link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Don't have an account? "),
+                      const Text('Pas encore de compte ? '),
                       TextButton(
                         onPressed: () {
                           Navigator.pushNamed(context, '/signup');
                         },
-                        child: const Text('Sign Up'),
+                        child: const Text("S'inscrire"),
                       ),
                     ],
                   ),

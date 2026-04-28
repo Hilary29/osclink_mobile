@@ -7,10 +7,10 @@ class ResourcesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Resources'),
+        title: const Text('Ressources'),
       ),
       body: const Center(
-        child: Text('Resources Screen'),
+        child: Text('Écran Ressources'),
       ),
     );
   }

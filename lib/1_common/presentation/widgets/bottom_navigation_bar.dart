@@ -35,22 +35,22 @@ class CustomBottomNavigationBar extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Accueil',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
             activeIcon: Icon(Icons.chat_bubble),
-            label: 'Chat',
+            label: 'Messages',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map_outlined),
             activeIcon: Icon(Icons.map),
-            label: 'Map',
+            label: 'Carte',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             activeIcon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'Profil',
           ),
         ],
       ),

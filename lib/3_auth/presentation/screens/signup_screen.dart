@@ -58,7 +58,6 @@ class _SignupViewState extends State<SignupView> {
                 children: [
                   const SizedBox(height: 60),
 
-                  // Logo
                   Image.asset(
                     'osclink-logo.png',
                     height: 56,
@@ -68,7 +67,7 @@ class _SignupViewState extends State<SignupView> {
                   const SizedBox(height: 20),
 
                   const Text(
-                    'Create your account',
+                    'Créer votre compte',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 18,
@@ -78,28 +77,27 @@ class _SignupViewState extends State<SignupView> {
 
                   const SizedBox(height: 8),
                   const Text(
-                    'The Civil Society Organisation Network',
+                    'Le Réseau des Organisations de la Société Civile',
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey),
                   ),
 
                   const SizedBox(height: 48),
 
-                  // Email
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
-                      labelText: 'Email',
+                      labelText: 'Adresse e-mail',
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
+                        return 'Veuillez saisir votre adresse e-mail';
                       }
                       if (!value.contains('@')) {
-                        return 'Please enter a valid email';
+                        return 'Veuillez saisir une adresse e-mail valide';
                       }
                       return null;
                     },
@@ -107,12 +105,11 @@ class _SignupViewState extends State<SignupView> {
 
                   const SizedBox(height: 16),
 
-                  // Password
                   TextFormField(
                     controller: _passwordController,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
-                      labelText: 'Password',
+                      labelText: 'Mot de passe',
                       prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -130,10 +127,10 @@ class _SignupViewState extends State<SignupView> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter a password';
+                        return 'Veuillez saisir un mot de passe';
                       }
                       if (value.length < 6) {
-                        return 'Password must be at least 6 characters';
+                        return 'Le mot de passe doit contenir au moins 6 caractères';
                       }
                       return null;
                     },
@@ -141,12 +138,11 @@ class _SignupViewState extends State<SignupView> {
 
                   const SizedBox(height: 16),
 
-                  // Confirm Password
                   TextFormField(
                     controller: _confirmPasswordController,
                     obscureText: _obscureConfirmPassword,
                     decoration: InputDecoration(
-                      labelText: 'Confirm Password',
+                      labelText: 'Confirmer le mot de passe',
                       prefixIcon: const Icon(Icons.lock_outline),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -165,10 +161,10 @@ class _SignupViewState extends State<SignupView> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please confirm your password';
+                        return 'Veuillez confirmer votre mot de passe';
                       }
                       if (value != _passwordController.text) {
-                        return 'Passwords do not match';
+                        return 'Les mots de passe ne correspondent pas';
                       }
                       return null;
                     },
@@ -176,11 +172,11 @@ class _SignupViewState extends State<SignupView> {
 
                   const SizedBox(height: 24),
 
-                  // Signup button
                   BlocBuilder<AuthBloc, AuthState>(
                     builder: (context, state) {
                       return ElevatedButton(
-                        onPressed: state is AuthLoading ? null : _handleSignup,
+                        onPressed:
+                            state is AuthLoading ? null : _handleSignup,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
@@ -196,23 +192,22 @@ class _SignupViewState extends State<SignupView> {
                                   color: Colors.white,
                                 ),
                               )
-                            : const Text('Sign Up'),
+                            : const Text("S'inscrire"),
                       );
                     },
                   ),
 
                   const SizedBox(height: 24),
 
-                  // Login link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Already have an account? '),
+                      const Text('Déjà un compte ? '),
                       TextButton(
                         onPressed: () {
                           Navigator.pushReplacementNamed(context, '/login');
                         },
-                        child: const Text('Login'),
+                        child: const Text('Se connecter'),
                       ),
                     ],
                   ),
