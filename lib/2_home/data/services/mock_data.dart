@@ -5,29 +5,29 @@ class MockData {
   static final List<User> users = [
     User(
       id: '1',
-      name: 'Martha Craig',
-      username: '@craig_love',
+      name: 'Amara Diallo',
+      username: '@amara_diallo',
       avatarUrl: 'https://i.pravatar.cc/150?img=1',
       isVerified: false,
     ),
     User(
       id: '2',
-      name: 'Maximmilian',
-      username: '@maxjacobson',
+      name: 'Kofi Mensah',
+      username: '@kofi_mensah',
       avatarUrl: 'https://i.pravatar.cc/150?img=2',
       isVerified: false,
     ),
     User(
       id: '3',
-      name: 'Tabitha Potter',
-      username: '@mis_potter',
+      name: 'Fatou Ndiaye',
+      username: '@fatou_ndiaye',
       avatarUrl: 'https://i.pravatar.cc/150?img=3',
       isVerified: true,
     ),
     User(
       id: '4',
-      name: 'karennne',
-      username: '@karennne',
+      name: 'Chioma Okafor',
+      username: '@chioma_osc',
       avatarUrl: 'https://i.pravatar.cc/150?img=4',
       isVerified: false,
     ),
@@ -41,7 +41,7 @@ class MockData {
         id: '1',
         author: users[0],
         content:
-            'UXR/UX: You can only bring one item to a remote island to assist your research of native use of tools and usability. What do you bring? #TellMeAboutYou',
+            'La société civile joue un rôle crucial dans la promotion des droits humains en Afrique de l\'Ouest. Comment renforcer notre impact collectif ? #OSCLink #SociétéCivile',
         timestamp: now.subtract(const Duration(hours: 12)),
         commentsCount: 28,
         retweetsCount: 5,
@@ -51,7 +51,8 @@ class MockData {
       Post(
         id: '2',
         author: users[1],
-        content: 'Y\'all ready for this next post?',
+        content:
+            'Retour sur l\'atelier de renforcement des capacités des OSC au Ghana 🇬🇭 — des échanges enrichissants sur la gouvernance participative et la mobilisation communautaire.',
         timestamp: now.subtract(const Duration(hours: 3)),
         commentsCount: 46,
         retweetsCount: 18,
@@ -73,7 +74,7 @@ class MockData {
         id: '4',
         author: users[3],
         content:
-            'Name a show where the lead character is the worst character on the show I\'ll get Sabrina Spellman',
+            'Quelle organisation de la société civile africaine a eu, selon vous, le plus grand impact ces 10 dernières années ? Partagez votre avis ! 🌍 #Afrique #OSC',
         timestamp: now.subtract(const Duration(hours: 10)),
         commentsCount: 1906,
         retweetsCount: 1249,

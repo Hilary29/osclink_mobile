@@ -82,7 +82,6 @@ class HomeView extends StatelessWidget {
   }
 }
 
-// ─── AppBar ───────────────────────────────────
 
 class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const _HomeAppBar();
@@ -99,15 +98,7 @@ class _HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 16,
       title: Row(
         children: [
-          Container(
-            width: 28,
-            height: 28,
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: const Icon(Icons.hub, color: Colors.white, size: 16),
-          ),
+          
           const SizedBox(width: 8),
           const Text(
             'OSC Link',
@@ -158,8 +149,6 @@ class _NotificationButton extends StatelessWidget {
     );
   }
 }
-
-// ─── États vide / erreur ─────────────────────
 
 class _EmptyView extends StatelessWidget {
   const _EmptyView();

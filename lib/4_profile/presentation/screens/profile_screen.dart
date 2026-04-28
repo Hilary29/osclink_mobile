@@ -8,10 +8,6 @@ import '../../business_logic/profile_state.dart';
 import '../../data/models/profile_model.dart';
 import '../widgets/profile_stats_row.dart';
 
-// ─────────────────────────────────────────────
-// ProfileScreen — Écran principal du profil
-// ─────────────────────────────────────────────
-
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -121,17 +117,20 @@ class _ProfileView extends StatelessWidget {
   }
 }
 
-// ─── Cover SliverAppBar ───────────────────────
-
 class _CoverSliverAppBar extends StatelessWidget {
   final UserProfile profile;
 
   const _CoverSliverAppBar({required this.profile});
 
+  static const double _coverHeight = 160;
+  static const double _avatarRadius = 44;
+  // expandedHeight = cover + avatar bottom half + breathing room
+  static const double _expandedHeight = _coverHeight + _avatarRadius + 16;
+
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 160,
+      expandedHeight: _expandedHeight,
       pinned: true,
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
@@ -144,23 +143,56 @@ class _CoverSliverAppBar extends StatelessWidget {
       ],
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
-          fit: StackFit.expand,
           children: [
-            profile.coverUrl != null
-                ? Image.network(
-                    profile.coverUrl!,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => _CoverFallback(),
-                  )
-                : _CoverFallback(),
-            // gradient overlay pour lisibilité des boutons
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color(0x55000000), Colors.transparent],
-                  stops: [0.0, 0.6],
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: _coverHeight,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  profile.coverUrl != null
+                      ? Image.network(
+                          profile.coverUrl!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => _CoverFallback(),
+                        )
+                      : _CoverFallback(),
+                  Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Color(0x55000000), Colors.transparent],
+                        stops: [0.0, 0.6],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Fond blanc sous la cover (zone de chevauchement de l'avatar)
+            Positioned(
+              top: _coverHeight,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Container(color: Colors.white),
+            ),
+            // Avatar centré sur la frontière cover/blanc — toujours au-dessus
+            Positioned(
+              top: _coverHeight - _avatarRadius,
+              left: 16,
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white, width: 3),
+                ),
+                child: CircleAvatar(
+                  radius: _avatarRadius,
+                  backgroundImage: NetworkImage(profile.avatarUrl),
+                  backgroundColor: const Color(0xFFCED5DC),
                 ),
               ),
             ),
@@ -186,8 +218,6 @@ class _CoverFallback extends StatelessWidget {
   }
 }
 
-// ─── Profile Info Section ─────────────────────
-
 class _ProfileInfoSection extends StatelessWidget {
   final UserProfile profile;
 
@@ -197,92 +227,66 @@ class _ProfileInfoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Stack(
-        clipBehavior: Clip.none,
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(
-                top: 56, left: 16, right: 16, bottom: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    OutlinedButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => BlocProvider.value(
-                            value: context.read<ProfileBloc>(),
-                            child: ProfileEditScreen(profile: profile),
-                          ),
-                        ),
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.textPrimary,
-                        side: const BorderSide(color: Color(0xFFCED5DC)),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: const Text(
-                        'Modifier le profil',
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.w500),
-                      ),
+          // Bouton aligné à droite, face à l'avatar
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              OutlinedButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                      value: context.read<ProfileBloc>(),
+                      child: ProfileEditScreen(profile: profile),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                _NameRow(profile: profile),
-                const SizedBox(height: 2),
-                Text(
-                  profile.username,
-                  style: const TextStyle(
-                      fontSize: 14, color: AppColors.textSecondary),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  profile.bio,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFF141619),
-                    height: 1.4,
                   ),
                 ),
-                const SizedBox(height: 10),
-                _MetaRow(profile: profile),
-                const SizedBox(height: 14),
-                const Divider(color: Color(0xFFCED5DC), height: 1),
-                const SizedBox(height: 14),
-                ProfileStatsRow(
-                  postsCount: profile.postsCount,
-                  followersCount: profile.followersCount,
-                  followingCount: profile.followingCount,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.textPrimary,
+                  side: const BorderSide(color: Color(0xFFCED5DC)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
-                const SizedBox(height: 6),
-              ],
+                child: const Icon(Icons.edit, color: Colors.black, size: 20),
+              
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          _NameRow(profile: profile),
+          const SizedBox(height: 2),
+          Text(
+            profile.username,
+            style:
+                const TextStyle(fontSize: 14, color: AppColors.textSecondary),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            profile.bio,
+            style: const TextStyle(
+              fontSize: 14,
+              color: Color(0xFF141619),
+              height: 1.4,
             ),
           ),
-          // Avatar chevauchant la cover
-          Positioned(
-            top: -44,
-            left: 16,
-            child: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 3),
-              ),
-              child: CircleAvatar(
-                radius: 44,
-                backgroundImage: NetworkImage(profile.avatarUrl),
-                backgroundColor: const Color(0xFFCED5DC),
-              ),
-            ),
+          const SizedBox(height: 10),
+          _MetaRow(profile: profile),
+          const SizedBox(height: 14),
+          const Divider(color: Color(0xFFCED5DC), height: 1),
+          const SizedBox(height: 14),
+          ProfileStatsRow(
+            postsCount: profile.postsCount,
+            followersCount: profile.followersCount,
+            followingCount: profile.followingCount,
           ),
+          const SizedBox(height: 6),
         ],
       ),
     );
@@ -339,8 +343,7 @@ class _MetaRow extends StatelessWidget {
       runSpacing: 6,
       children: [
         if (profile.location != null)
-          _MetaChip(
-              icon: Icons.location_on_outlined, text: profile.location!),
+          _MetaChip(icon: Icons.location_on_outlined, text: profile.location!),
         if (profile.website != null)
           _MetaChip(
               icon: Icons.link,
@@ -357,8 +360,19 @@ class _MetaRow extends StatelessWidget {
 
   String _monthName(int month) {
     const months = [
-      '', 'janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin',
-      'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'
+      '',
+      'janv.',
+      'févr.',
+      'mars',
+      'avr.',
+      'mai',
+      'juin',
+      'juil.',
+      'août',
+      'sept.',
+      'oct.',
+      'nov.',
+      'déc.'
     ];
     return months[month];
   }
@@ -432,8 +446,7 @@ class _PostsTab extends StatelessWidget {
     return ListView.builder(
       padding: EdgeInsets.zero,
       itemCount: profile.posts.length,
-      itemBuilder: (_, index) =>
-          PostCardWidget(post: profile.posts[index]),
+      itemBuilder: (_, index) => PostCardWidget(post: profile.posts[index]),
     );
   }
 }
@@ -486,8 +499,19 @@ class _AboutTab extends StatelessWidget {
 
   String _monthName(int month) {
     const months = [
-      '', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-      'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+      '',
+      'Janvier',
+      'Février',
+      'Mars',
+      'Avril',
+      'Mai',
+      'Juin',
+      'Juillet',
+      'Août',
+      'Septembre',
+      'Octobre',
+      'Novembre',
+      'Décembre'
     ];
     return months[month];
   }
@@ -579,7 +603,8 @@ class _ProjectCard extends StatelessWidget {
     (
       title: 'Renforcement des capacités des OSC',
       status: 'En cours',
-      desc: 'Formation et accompagnement des organisations de la société civile locale.'
+      desc:
+          'Formation et accompagnement des organisations de la société civile locale.'
     ),
     (
       title: 'Observatoire citoyen numérique',
@@ -623,8 +648,7 @@ class _ProjectCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: isActive
                       ? AppColors.primary.withValues(alpha: 0.12)
@@ -689,10 +713,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     super.initState();
     _nameCtrl = TextEditingController(text: widget.profile.name);
     _bioCtrl = TextEditingController(text: widget.profile.bio);
-    _locationCtrl =
-        TextEditingController(text: widget.profile.location ?? '');
-    _websiteCtrl =
-        TextEditingController(text: widget.profile.website ?? '');
+    _locationCtrl = TextEditingController(text: widget.profile.location ?? '');
+    _websiteCtrl = TextEditingController(text: widget.profile.website ?? '');
   }
 
   @override
@@ -768,8 +790,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 children: [
                   CircleAvatar(
                     radius: 44,
-                    backgroundImage:
-                        NetworkImage(widget.profile.avatarUrl),
+                    backgroundImage: NetworkImage(widget.profile.avatarUrl),
                     backgroundColor: const Color(0xFFCED5DC),
                   ),
                   Positioned(
@@ -781,8 +802,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       decoration: BoxDecoration(
                         color: AppColors.primary,
                         shape: BoxShape.circle,
-                        border:
-                            Border.all(color: Colors.white, width: 2),
+                        border: Border.all(color: Colors.white, width: 2),
                       ),
                       child: const Icon(Icons.camera_alt,
                           size: 14, color: Colors.white),
@@ -866,8 +886,8 @@ class _EditField extends StatelessWidget {
                 : null,
             filled: true,
             fillColor: Colors.white,
-            contentPadding: const EdgeInsets.symmetric(
-                horizontal: 14, vertical: 12),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: Color(0xFFCED5DC)),
@@ -1019,8 +1039,7 @@ class _SettingsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border:
-            Border.all(color: const Color(0xFFCED5DC), width: 0.5),
+        border: Border.all(color: const Color(0xFFCED5DC), width: 0.5),
       ),
       child: Column(
         children: List.generate(items.length, (i) {
@@ -1065,20 +1084,17 @@ class _SettingsTile extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: titleColor),
+            fontSize: 14, fontWeight: FontWeight.w500, color: titleColor),
       ),
       subtitle: subtitle != null
           ? Text(subtitle!,
-              style: const TextStyle(
-                  fontSize: 12, color: AppColors.textSecondary))
+              style:
+                  const TextStyle(fontSize: 12, color: AppColors.textSecondary))
           : null,
-      trailing: const Icon(Icons.chevron_right,
-          size: 18, color: Color(0xFFBDC5CD)),
+      trailing:
+          const Icon(Icons.chevron_right, size: 18, color: Color(0xFFBDC5CD)),
       onTap: onTap,
-      contentPadding:
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
     );
   }
 }
@@ -1110,20 +1126,20 @@ class _ToggleTileState extends State<_ToggleTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading:
-          Icon(widget.icon, size: 20, color: AppColors.textSecondary),
+      leading: Icon(widget.icon, size: 20, color: AppColors.textSecondary),
       title: Text(
         widget.title,
         style: const TextStyle(
-            fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF141619)),
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF141619)),
       ),
       trailing: Switch(
         value: _value,
         onChanged: (v) => setState(() => _value = v),
         activeColor: AppColors.primary,
       ),
-      contentPadding:
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
     );
   }
 }
