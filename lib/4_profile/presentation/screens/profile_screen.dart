@@ -169,6 +169,33 @@ class _CoverSliverAppBar extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // Bouton Edit en bas à droite de la cover
+                  Positioned(
+                    bottom: 10,
+                    right: 16,
+                    child: IconButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                            value: context.read<ProfileBloc>(),
+                            child: ProfileEditScreen(profile: profile),
+                          ),
+                          
+                        ),
+                      ),
+                      style: IconButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        side: const BorderSide(color: Colors.white70),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ), icon: Icon(Icons.edit,
+                          color: Colors.black, size: 18),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -231,35 +258,6 @@ class _ProfileInfoSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Bouton aligné à droite, face à l'avatar
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              OutlinedButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => BlocProvider.value(
-                      value: context.read<ProfileBloc>(),
-                      child: ProfileEditScreen(profile: profile),
-                    ),
-                  ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.textPrimary,
-                  side: const BorderSide(color: Color(0xFFCED5DC)),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                child: const Icon(Icons.edit, color: Colors.black, size: 20),
-              
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
           _NameRow(profile: profile),
           const SizedBox(height: 2),
           Text(
@@ -687,10 +685,6 @@ class _ProjectCard extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────
-// ProfileEditScreen — Édition du profil
-// ─────────────────────────────────────────────
-
 class ProfileEditScreen extends StatefulWidget {
   final UserProfile profile;
 
@@ -908,9 +902,6 @@ class _EditField extends StatelessWidget {
   }
 }
 
-// ─────────────────────────────────────────────
-// ProfileSettingsScreen — Paramètres
-// ─────────────────────────────────────────────
 
 class ProfileSettingsScreen extends StatelessWidget {
   const ProfileSettingsScreen({super.key});

@@ -7,7 +7,7 @@ class NotFoundScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Page Not Found'),
+        title: const Text('Page introuvable'),
       ),
       body: const Center(
         child: Column(
@@ -29,7 +29,7 @@ class NotFoundScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Page Not Found',
+              'Page introuvable',
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.grey,
