@@ -5,7 +5,7 @@ class ProfileMockData {
   static UserProfile getCurrentUserProfile() {
     return UserProfile(
       id: 'me',
-      name: 'Hilary Keuboufeutchoue',
+      name: 'Hilary D',
       username: '@hilary_osc',
       avatarUrl: 'https://i.pravatar.cc/150?img=10',
       coverUrl: 'https://picsum.photos/seed/osclink/800/300',
